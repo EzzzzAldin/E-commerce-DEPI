@@ -4,6 +4,7 @@ function App() {
   return (
     <main>
       <Home />
+      <h2>My Branch</h2>
     </main>
   );
 }
