@@ -1,7 +1,17 @@
 import bag from "../../assets/photo bag.png";
 import star from "../../assets/Star 2.svg";
 
-function ProductCard() {
+function ProductCard({ title = "Test Product", price = 100 }) {
+  // L1 => Data
+  // L2 => Effects
+  // L3 => Logic
+  // L4 => View
+  // const users = { username: "omar", age: "30" };
+
+  // const { name, age } = users;
+  // const username = users.name;
+  // const userAge = users.age;
+  const dis = false;
   return (
     <div className="card flex flex-col w-75 bg-white shadow-2xl rounded-lg">
       <div className="card-top flex flex-col items-center gap-1.25 py-4">
@@ -25,7 +35,7 @@ function ProductCard() {
         <img className="h-32 w-60 object-cover" src={bag} alt="product image" />
       </div>
       <div className="card-down flex flex-col gap-1.5 py-4 px-18.5">
-        <h3 className="text-base font-bold text-gray-800">Tonny Black</h3>
+        <h3 className="text-base font-bold text-gray-800">{title}</h3>
         <p className="text-xs text-gray-600">Shoulder bag-White-Plain</p>
         <div className="rating flex items-center gap-px">
           <div className="flex">
@@ -38,11 +48,21 @@ function ProductCard() {
           <span>(54)</span>
         </div>
         <div className="price flex items-center justify-between">
-          <span className="text-sm font-bold text-red-off">50$</span>
+          <span className="text-sm font-bold text-red-off">{price}$</span>
           <del className="text-xs text-gray-600">100$</del>
-          <span className="sale py-0.75 px-1.5 rounded-xs bg-red-off text-[8px] font-semibold text-white">
-            -40%
-          </span>
+          {/* {dis ? (
+            <span className="sale py-0.75 px-1.5 rounded-xs bg-red-off text-[8px] font-semibold text-white">
+              -40%
+            </span>
+          ) : (
+            <span> Real Price</span>
+          )} */}
+
+          {dis && (
+            <span className="sale py-0.75 px-1.5 rounded-xs bg-red-off text-[8px] font-semibold text-white">
+              -40%
+            </span>
+          )}
         </div>
       </div>
     </div>
