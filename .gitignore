@@ -11,6 +11,10 @@ node_modules
 dist
 dist-ssr
 *.local
+/Ecommerce.fig
+/Ecommerce.pdf
+/MASTER_SESSION_BUNDLE.md
+
 
 # Editor directories and files
 .vscode/*
