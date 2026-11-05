@@ -1,0 +1,1762 @@
+================================================================================
+CLAUDE CODE BUNDLE - ECOMMERCE PROJECT
+FINAL LECTURE BASELINE (POST-CLEANUP)
+================================================================================
+
+Project root : C:\Users\Ezz\OneDrive\Desktop\Dapi\Ecommerce
+Generated    : 2026-11-05
+Branch       : session-combined
+HEAD         : 51390bf  ("version 4")
+Upstream     : origin/master = 51390bf
+Working tree : uncommitted changes exist (see section 3)
+
+SOURCE OF TRUTH
+---------------
+Every code block in this file is generated directly from the file on disk at
+the paths shown. If any prose disagrees with the code, the code wins.
+
+PURPOSE
+-------
+This bundle describes the FINAL LECTURE BASELINE after the cleanup:
+
+- FlashSales.jsx is now the official educational version.
+- It was copied byte-for-byte from the old educational commit 43fe37f.
+- It contains the ProductCard import, the products data array, products.map(),
+  key, and props passing.
+- ProductCard.jsx is the props-based component used by FlashSales.
+- The temporary Section experiment and lectureCode.txt were removed.
+- The Static UI sections Trending, Top100, and CartRows remain in the project
+  and are still mounted by Home.
+- No commit or push was made.
+
+The next work should start from these files and keep the educational code style.
+Do not replace FlashSales.jsx with the old Static UI implementation.
+Do not refactor the code into abstractions that were not requested.
+
+
+================================================================================
+1. CURRENT BASELINE - READ THIS FIRST
+================================================================================
+
+1.1 The official lecture file
+--------------------------------------------------------------------------------
+src/components/home/FlashSales.jsx is the primary lecture file now.
+
+It is the old educational implementation, not the static repeated-JSX version.
+Its exact contents:
+
+    import ProductCard from "../product/ProductCard";
+
+    function FlashSales() {
+      // L1 => Data
+      const products = [
+        { id: 1, title: "shoulder bag", price: 150 },
+        { id: 2, title: "Laptop ", price: 30000 },
+        { id: 3, title: "Screen ", price: 20000 },
+      ];
+      // L2 => Api Call
+      // L3 => Logic
+      // L4 => View
+      return (
+        <section className="flash-sales flex flex-col gap-12 max-w-page mx-auto">
+          <div className="flex items-center justify-between">
+            <h2 className="text-3xl font-medium text-black">Flash Sales</h2>
+            <a href="#">View All</a>
+          </div>
+          <div className="flex gap-5">
+            {products.map((product) => (
+              <ProductCard
+                key={product.id}
+                title={product.title}
+                price={product.price}
+              />
+            ))}
+          </div>
+        </section>
+      );
+    }
+
+    export default FlashSales;
+
+Preserve all of it, including:
+- the teaching comments L1 / L2 / L3 / L4;
+- the array of three products;
+- map() and key={product.id};
+- title={product.title} and price={product.price};
+- the simple <a href="#">View All</a> link.
+
+1.2 The props component
+--------------------------------------------------------------------------------
+src/components/product/ProductCard.jsx remains the props-based component:
+
+    function ProductCard({ title = "Test Product", price = 100 }) { ... }
+
+It also contains the teaching comments, `const dis = false;`, the rating block,
+the old price, and the conditional discount demo. Do not delete or simplify it.
+
+1.3 What the page renders now
+--------------------------------------------------------------------------------
+Home still renders four blocks in this order:
+
+    <FlashSales />    <- educational Props/Data/map version
+    <Trending />      <- static section (unchanged)
+    <Top100 />        <- static section (unchanged)
+    <CartRows />      <- static section (unchanged)
+
+Home was NOT reverted to the old one-section version. App, main, CSS, and the
+static sections were not restored from old commits.
+
+1.4 Root rule
+--------------------------------------------------------------------------------
+Keep the educational style. Do not:
+- replace FlashSales with the static repeated-card version;
+- extract a Section wrapper or any new abstraction;
+- introduce hooks, state, APIs, or data models beyond what is already there;
+- reorganize or "improve" the code;
+- remove the teaching comments;
+- change Home unless a direct requirement demands it;
+- modify Trending, Top100, or CartRows.
+
+
+================================================================================
+2. RENDER TREE (VERIFIED FROM SOURCE)
+================================================================================
+
+index.html
+  -> #root
+      -> src/main.jsx
+          -> <StrictMode>
+              -> <App />
+                  -> src/App.jsx
+                      -> <main>
+                          -> <Home />
+                              -> src/pages/Home.jsx
+                                  -> <FlashSales />   (educational baseline)
+                                  -> <Trending />     (static)
+                                  -> <Top100 />       (static)
+                                  -> <CartRows />     (static)
+                          -> <h2>My Branch</h2>
+                      -> </main>
+
+There is no router, no Header, no Navbar, no Footer, no Hero render, and no
+page container beyond the plain <main> in App.jsx.
+
+
+================================================================================
+3. GIT AND WORKING-TREE STATE AT GENERATION
+================================================================================
+
+Branch       : session-combined
+HEAD         : 51390bf  ("version 4")
+Upstream     : origin/master = 51390bf
+Commits made : none during this cleanup
+Push         : none
+
+Working tree:
+    M  src/components/home/FlashSales.jsx
+    ?? CLAUDE_CODE_BUNDLE.txt
+    ?? REACT_LECTURE_EXAMPLES.txt
+    ?? REACT_LIVE_TASKS_AND_SOLUTIONS.txt
+    ?? lecture-test/
+    ?? lecture.txt
+
+The M on FlashSales.jsx is expected: the tracked static version was replaced by
+the educational version. The other entries are the retained lecture materials
+and this bundle.
+
+Protection references (must not be deleted or rewritten):
+    backup/static-ui-51390bf          -> 51390bf
+    backup/education-final-43fe37f    -> 43fe37f
+    backup/lecture-docs-811e7c5       -> 811e7c5
+    backup/combined-7afdece           -> 7afdece
+
+External file backup from the recovery step:
+    C:\Users\Ezz\OneDrive\Desktop\Dapi\Ecommerce-recovery-backup-20261105-224456
+
+It contains the former uncommitted FlashSales modification, the deleted
+Section.jsx, the deleted lectureCode.txt, the previous bundle, a diff, and the
+status snapshot. Do not delete it.
+
+
+================================================================================
+4. FILE MAP - CURRENT STATE
+================================================================================
+
+PRIMARY LECTURE FILES
+---------------------
+src/components/home/FlashSales.jsx
+    Official educational baseline: ProductCard import, products array, map(),
+    key, title/price props.
+
+src/components/product/ProductCard.jsx
+    Props component used by FlashSales. Contains default props, teaching
+    comments, rating, old/new price, and the conditional discount demo.
+
+PAGE / ENTRY FILES
+------------------
+src/pages/Home.jsx
+    Mounts FlashSales, Trending, Top100, CartRows in that order.
+
+src/App.jsx
+    Plain <main>, <Home />, and the literals <h2>My Branch</h2>.
+
+src/main.jsx
+    React entry point with StrictMode and index.css import.
+
+STATIC UI STILL PRESENT (UNCHANGED)
+-----------------------------------
+src/components/home/Trending.jsx
+src/components/home/Top100.jsx
+src/components/cart/CartRows.jsx
+src/assets/heart.svg
+src/components/ui/Icons.jsx       (exists, currently unused; do not treat as
+                                   part of the lecture baseline)
+
+EDUCATIONAL MATERIALS (RETAINED)
+--------------------------------
+REACT_LECTURE_EXAMPLES.txt
+REACT_LIVE_TASKS_AND_SOLUTIONS.txt
+lecture.txt
+lecture-test/product-card.test.mjs
+
+DOCUMENTATION
+-------------
+CLAUDE_CODE_BUNDLE.txt
+    This file. Updated to describe the post-cleanup baseline.
+
+CLEANED / DELETED IN THIS STEP
+------------------------------
+src/components/home/FlashSales.lecture.jsx
+    Deleted after its content was copied byte-for-byte into FlashSales.jsx.
+src/components/ui/Section.jsx
+    Deleted: temporary Section experiment, not imported anywhere.
+lectureCode.txt
+    Deleted: temporary copy of the Section experiment, not a primary source.
+
+UNUSED / EMPTY (NOT PART OF THE BASELINE)
+-----------------------------------------
+src/components/home/Hero.jsx      0 bytes, not imported.
+src/components/layouts/           empty directory.
+src/assets/hero.png               present, not imported by the current page.
+src/assets/react.svg              present, not imported by the current page.
+src/assets/vite.svg               present, not imported by the current page.
+MASTER_SESSION_BUNDLE.md          stale, gitignored; not authoritative.
+
+
+================================================================================
+5. FULL SOURCE - PRIMARY LECTURE BASELINE
+================================================================================
+
+--------------------------------------------------------------------------------
+FILE: src/components/home/FlashSales.jsx
+--------------------------------------------------------------------------------
+import ProductCard from "../product/ProductCard";
+
+function FlashSales() {
+  // L1 => Data
+  const products = [
+    { id: 1, title: "shoulder bag", price: 150 },
+    { id: 2, title: "Laptop ", price: 30000 },
+    { id: 3, title: "Screen ", price: 20000 },
+  ];
+  // L2 => Api Call
+  // L3 => Logic
+  // L4 => View
+  return (
+    <section className="flash-sales flex flex-col gap-12 max-w-page mx-auto">
+      <div className="flex items-center justify-between">
+        <h2 className="text-3xl font-medium text-black">Flash Sales</h2>
+        <a href="#">View All</a>
+      </div>
+      <div className="flex gap-5">
+        {products.map((product) => (
+          <ProductCard
+            key={product.id}
+            title={product.title}
+            price={product.price}
+          />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+export default FlashSales;
+
+--------------------------------------------------------------------------------
+FILE: src/components/product/ProductCard.jsx
+--------------------------------------------------------------------------------
+import bag from "../../assets/photo bag.png";
+import star from "../../assets/Star 2.svg";
+
+function ProductCard({ title = "Test Product", price = 100 }) {
+  // L1 => Data
+  // L2 => Effects
+  // L3 => Logic
+  // L4 => View
+  // const users = { username: "omar", age: "30" };
+
+  // const { name, age } = users;
+  // const username = users.name;
+  // const userAge = users.age;
+  const dis = false;
+  return (
+    <div className="card flex flex-col w-75 bg-white shadow-2xl rounded-lg">
+      <div className="card-top flex flex-col items-center gap-1.25 py-4">
+        <p className="text-sm font-extrabold text-gray-400">Deal of the Day</p>
+        <div className="date flex flex-col items-center">
+          <div className="flex items-center gap-1.5 text-lg font-extrabold text-gray-800">
+            <span>12</span>
+            <span>:</span>
+            <span>43</span>
+            <span>:</span>
+            <span>12</span>
+          </div>
+          <div className="date-info flex gap-6 text-xs text-gray-400">
+            <span>hour</span>
+            <span>min</span>
+            <span>sec</span>
+          </div>
+        </div>
+      </div>
+      <div className="card-mid flex items-center justify-center h-40.5">
+        <img className="h-32 w-60 object-cover" src={bag} alt="product image" />
+      </div>
+      <div className="card-down flex flex-col gap-1.5 py-4 px-18.5">
+        <h3 className="text-base font-bold text-gray-800">{title}</h3>
+        <p className="text-xs text-gray-600">Shoulder bag-White-Plain</p>
+        <div className="rating flex items-center gap-px">
+          <div className="flex">
+            <img className="size-3" src={star} />
+            <img className="size-3" src={star} />
+            <img className="size-3" src={star} />
+            <img className="size-3" src={star} />
+            <img className="size-3" src={star} />
+          </div>
+          <span>(54)</span>
+        </div>
+        <div className="price flex items-center justify-between">
+          <span className="text-sm font-bold text-red-off">{price}$</span>
+          <del className="text-xs text-gray-600">100$</del>
+          {/* {dis ? (
+            <span className="sale py-0.75 px-1.5 rounded-xs bg-red-off text-[8px] font-semibold text-white">
+              -40%
+            </span>
+          ) : (
+            <span> Real Price</span>
+          )} */}
+
+          {dis && (
+            <span className="sale py-0.75 px-1.5 rounded-xs bg-red-off text-[8px] font-semibold text-white">
+              -40%
+            </span>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default ProductCard;
+
+
+================================================================================
+6. FULL SOURCE - PAGE, ENTRY, AND STYLES
+================================================================================
+
+--------------------------------------------------------------------------------
+FILE: src/pages/Home.jsx
+--------------------------------------------------------------------------------
+import FlashSales from "../components/home/FlashSales";
+import Trending from "../components/home/Trending";
+import Top100 from "../components/home/Top100";
+import CartRows from "../components/cart/CartRows";
+
+function Home() {
+  return (
+    <>
+      <FlashSales />
+      <Trending />
+      <Top100 />
+      <CartRows />
+    </>
+  );
+}
+
+export default Home;
+
+--------------------------------------------------------------------------------
+FILE: src/App.jsx
+--------------------------------------------------------------------------------
+import Home from "./pages/Home";
+
+function App() {
+  return (
+    <main>
+      <Home />
+      <h2>My Branch</h2>
+    </main>
+  );
+}
+
+export default App;
+
+--------------------------------------------------------------------------------
+FILE: src/main.jsx
+--------------------------------------------------------------------------------
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import App from './App.jsx'
+
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+)
+
+--------------------------------------------------------------------------------
+FILE: src/index.css
+--------------------------------------------------------------------------------
+@import "tailwindcss";
+
+@theme {
+  --color-red-off: #ff2e00;
+  --color-gray-800: #262626;
+  --color-gray-600: #555555;
+
+  --font-sans: "Lato", sans-serif;
+
+  --container-page: 1260px;
+}
+
+
+================================================================================
+7. FULL SOURCE - STATIC UI SECTIONS STILL MOUNTED
+================================================================================
+
+These files are unchanged from the forward Static UI work. FlashSales is no
+longer in this group: it is the educational version above.
+
+--------------------------------------------------------------------------------
+FILE: src/components/home/Trending.jsx
+--------------------------------------------------------------------------------
+import bag from "../../assets/photo bag.png";
+
+function Trending() {
+  return (
+    <section className="trending flex flex-col gap-12 max-w-page mx-auto mt-20">
+      <div className="flex items-center justify-between">
+        <h2 className="text-3xl font-medium text-black">Trending must-haves</h2>
+        <a href="#" className="flex items-center gap-1 text-sm text-gray-600">
+          View all <span aria-hidden="true">›</span>
+        </a>
+      </div>
+
+      <div className="grid gap-5 md:grid-cols-3">
+        {/* Card 1 */}
+        <div className="relative aspect-[3/2] overflow-hidden rounded-lg">
+          <img
+            src={bag}
+            alt="Elegant shoulder bag"
+            className="h-full w-full object-cover"
+          />
+          <span className="absolute left-4 top-4 flex items-center gap-1.5 rounded-sm bg-emerald-600 px-3 py-1.5 text-xs font-semibold text-white">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="size-4"
+              aria-hidden="true"
+            >
+              <path d="M6 8h12l1 12H5L6 8Z" />
+              <path d="M9 8V6.5a3 3 0 0 1 6 0V8" />
+            </svg>
+            New Arrivals
+          </span>
+          <div className="absolute inset-x-0 bottom-0 flex flex-col items-start gap-3 bg-gray-800/95 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h3 className="text-base font-bold text-white">
+                Elegant shoulder bag
+              </h3>
+              <p className="text-sm text-gray-400">Beige-Casual</p>
+            </div>
+            <a
+              href="#"
+              className="flex shrink-0 items-center gap-2 rounded-md border border-white px-4 py-2 text-sm text-white"
+            >
+              <span className="font-bold">$89</span>
+              <span>Shop Now</span>
+            </a>
+          </div>
+        </div>
+
+        {/* Card 2 */}
+        <div className="relative aspect-[3/2] overflow-hidden rounded-lg">
+          <img
+            src={bag}
+            alt="Classic leather bag"
+            className="h-full w-full object-cover"
+          />
+          <div className="absolute inset-x-0 bottom-0 flex flex-col items-start gap-3 bg-gray-800/95 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h3 className="text-base font-bold text-white">
+                Classic leather bag
+              </h3>
+              <p className="text-sm text-gray-400">Black-Formal</p>
+            </div>
+            <a
+              href="#"
+              className="flex shrink-0 items-center gap-2 rounded-md border border-white px-4 py-2 text-sm text-white"
+            >
+              <span className="font-bold">$89</span>
+              <span>Shop Now</span>
+            </a>
+          </div>
+        </div>
+
+        {/* Card 3 */}
+        <div className="relative aspect-[3/2] overflow-hidden rounded-lg">
+          <img
+            src={bag}
+            alt="Beige chain bag"
+            className="h-full w-full object-cover"
+          />
+          <span className="absolute left-4 top-4 flex items-center gap-1.5 rounded-sm bg-emerald-600 px-3 py-1.5 text-xs font-semibold text-white">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="size-4"
+              aria-hidden="true"
+            >
+              <path d="M6 8h12l1 12H5L6 8Z" />
+              <path d="M9 8V6.5a3 3 0 0 1 6 0V8" />
+            </svg>
+            New Arrivals
+          </span>
+          <div className="absolute inset-x-0 bottom-0 flex flex-col items-start gap-3 bg-gray-800/95 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h3 className="text-base font-bold text-white">Beige chain bag</h3>
+              <p className="text-sm text-gray-400">Cream-Brown-Formal</p>
+            </div>
+            <a
+              href="#"
+              className="flex shrink-0 items-center gap-2 rounded-md border border-white px-4 py-2 text-sm text-white"
+            >
+              <span className="font-bold">$102</span>
+              <span>Shop Now</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default Trending;
+
+--------------------------------------------------------------------------------
+FILE: src/components/home/Top100.jsx
+--------------------------------------------------------------------------------
+import bag from "../../assets/photo bag.png";
+import heartIcon from "../../assets/heart.svg?no-inline";
+import star from "../../assets/Star 2.svg";
+
+function Top100() {
+  return (
+    <section className="top-100 flex flex-col gap-12 max-w-page mx-auto mt-20">
+      <div className="flex items-center justify-between">
+        <h2 className="text-3xl font-medium text-black">Top100</h2>
+        <a href="#" className="flex items-center gap-1 text-sm text-gray-600">
+          View all <span aria-hidden="true">›</span>
+        </a>
+      </div>
+
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Card 1 */}
+        <div className="overflow-hidden rounded-lg bg-white shadow-md">
+          <div className="flex aspect-square items-center justify-center bg-neutral-100">
+            <img
+              src={bag}
+              alt="Quilted shoulder bag"
+              className="h-full w-full object-contain"
+            />
+          </div>
+          <div className="p-5">
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <h3 className="text-base font-bold text-gray-800">Mango</h3>
+                <p className="text-xs text-gray-600">
+                  Quilted shoulder bag - White - Regular fit
+                </p>
+              </div>
+              <svg
+                viewBox="0 0 24 24"
+                className="size-6 shrink-0 text-gray-600"
+                aria-hidden="true"
+              >
+                <use href={`${heartIcon}#heart-outline`} />
+              </svg>
+            </div>
+            <div className="mt-3 flex items-center gap-2">
+              <div className="flex gap-0.5">
+                <img src={star} alt="" className="size-4" />
+                <img src={star} alt="" className="size-4" />
+                <img src={star} alt="" className="size-4" />
+                <img src={star} alt="" className="size-4" />
+                <img src={star} alt="" className="size-4" />
+              </div>
+              <span className="text-xs text-gray-600">(289)</span>
+            </div>
+            <div className="mt-3 flex items-center gap-2">
+              <span className="text-base font-bold text-red-off">$228</span>
+              <del className="text-sm text-gray-600">$290</del>
+              <span className="text-xs font-semibold text-red-off">-10%</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Card 2 */}
+        <div className="overflow-hidden rounded-lg bg-white shadow-md">
+          <div className="flex aspect-square items-center justify-center bg-neutral-100">
+            <img
+              src={bag}
+              alt="Chain shoulder bag"
+              className="h-full w-full object-contain"
+            />
+          </div>
+          <div className="p-5">
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <h3 className="text-base font-bold text-gray-800">Zara</h3>
+                <p className="text-xs text-gray-600">
+                  Chain shoulder bag - Beige - Daily fit
+                </p>
+              </div>
+              <svg
+                viewBox="0 0 24 24"
+                className="size-6 shrink-0 text-gray-600"
+                aria-hidden="true"
+              >
+                <use href={`${heartIcon}#heart-outline`} />
+              </svg>
+            </div>
+            <div className="mt-3 flex items-center gap-2">
+              <div className="flex gap-0.5">
+                <img src={star} alt="" className="size-4" />
+                <img src={star} alt="" className="size-4" />
+                <img src={star} alt="" className="size-4" />
+                <img src={star} alt="" className="size-4" />
+                <img src={star} alt="" className="size-4" />
+              </div>
+              <span className="text-xs text-gray-600">(523)</span>
+            </div>
+            <div className="mt-3 flex items-center gap-2">
+              <span className="text-base font-bold text-red-off">$95</span>
+              <del className="text-sm text-gray-600">$145</del>
+              <span className="text-xs font-semibold text-red-off">-7%</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Card 3 */}
+        <div className="overflow-hidden rounded-lg bg-white shadow-md">
+          <div className="flex aspect-square items-center justify-center bg-neutral-100">
+            <img
+              src={bag}
+              alt="Mini shoulder bag"
+              className="h-full w-full object-contain"
+            />
+          </div>
+          <div className="p-5">
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <h3 className="text-base font-bold text-gray-800">Uniqlo</h3>
+                <p className="text-xs text-gray-600">
+                  Mini shoulder bag - Black - Slim fit
+                </p>
+              </div>
+              <svg
+                viewBox="0 0 24 24"
+                className="size-6 shrink-0 text-gray-600"
+                aria-hidden="true"
+              >
+                <use href={`${heartIcon}#heart-outline`} />
+              </svg>
+            </div>
+            <div className="mt-3 flex items-center gap-2">
+              <div className="flex gap-0.5">
+                <img src={star} alt="" className="size-4" />
+                <img src={star} alt="" className="size-4" />
+                <img src={star} alt="" className="size-4" />
+                <img src={star} alt="" className="size-4" />
+                <img src={star} alt="" className="size-4" />
+              </div>
+              <span className="text-xs text-gray-600">(86)</span>
+            </div>
+            <div className="mt-3 flex items-center gap-2">
+              <span className="text-base font-bold text-red-off">$125</span>
+              <del className="text-sm text-gray-600">$156</del>
+              <span className="text-xs font-semibold text-red-off">-8%</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Card 4 */}
+        <div className="overflow-hidden rounded-lg bg-white shadow-md">
+          <div className="flex aspect-square items-center justify-center bg-neutral-100">
+            <img
+              src={bag}
+              alt="Classic shoulder bag"
+              className="h-full w-full object-contain"
+            />
+          </div>
+          <div className="p-5">
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <h3 className="text-base font-bold text-gray-800">
+                  Mango bag
+                </h3>
+                <p className="text-xs text-gray-600">
+                  Classic shoulder bag - Cream - Timeless fit
+                </p>
+              </div>
+              <svg
+                viewBox="0 0 24 24"
+                className="size-6 shrink-0 text-gray-600"
+                aria-hidden="true"
+              >
+                <use href={`${heartIcon}#heart-outline`} />
+              </svg>
+            </div>
+            <div className="mt-3 flex items-center gap-2">
+              <div className="flex gap-0.5">
+                <img src={star} alt="" className="size-4" />
+                <img src={star} alt="" className="size-4" />
+                <img src={star} alt="" className="size-4" />
+                <img src={star} alt="" className="size-4" />
+                <img src={star} alt="" className="size-4" />
+              </div>
+              <span className="text-xs text-gray-600">(121)</span>
+            </div>
+            <div className="mt-3 flex items-center gap-2">
+              <span className="text-base font-bold text-red-off">$365</span>
+              <del className="text-sm text-gray-600">$487</del>
+              <span className="text-xs font-semibold text-red-off">-15%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default Top100;
+
+--------------------------------------------------------------------------------
+FILE: src/components/cart/CartRows.jsx
+--------------------------------------------------------------------------------
+import bag from "../../assets/photo bag.png";
+
+function CartRows() {
+  return (
+    <div className="cart-rows flex flex-col gap-4 max-w-page mx-auto mt-20 mb-20">
+        {/* Row 1 */}
+        <div className="flex flex-wrap items-center gap-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
+          <img
+            src={bag}
+            alt="Shoulder bag"
+            className="size-20 rounded-md object-cover"
+          />
+          <div className="min-w-40 flex-1">
+            <h3 className="text-sm font-bold text-gray-800">Shoulder bag</h3>
+            <div className="mt-2 flex items-center gap-2">
+              <span className="size-3 rounded-full border border-gray-300 bg-amber-200" />
+              <span className="text-xs text-gray-600">Beige</span>
+            </div>
+          </div>
+          <span className="w-16 text-sm text-gray-600">$150</span>
+          <div className="flex items-center rounded-md border border-gray-300">
+            <button
+              type="button"
+              aria-label="Decrease quantity"
+              className="px-3 py-1 text-gray-600"
+            >
+              −
+            </button>
+            <span className="min-w-8 text-center text-sm">1</span>
+            <button
+              type="button"
+              aria-label="Increase quantity"
+              className="px-3 py-1 text-gray-600"
+            >
+              +
+            </button>
+          </div>
+          <span className="w-20 text-right text-sm font-bold text-gray-800">
+            $150
+          </span>
+          <button
+            type="button"
+            aria-label="Remove item"
+            className="text-gray-600"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="size-5"
+              aria-hidden="true"
+            >
+              <path d="M4 7h16" />
+              <path d="M9 7V4h6v3" />
+              <path d="M6 7l1 13h10l1-13" />
+              <path d="M10 11v5M14 11v5" />
+            </svg>
+          </button>
+        </div>
+
+        {/* Row 2 */}
+        <div className="flex flex-wrap items-center gap-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
+          <img
+            src={bag}
+            alt="Mini leather bag"
+            className="size-20 rounded-md object-cover"
+          />
+          <div className="min-w-40 flex-1">
+            <h3 className="text-sm font-bold text-gray-800">
+              Mini leather bag
+            </h3>
+            <div className="mt-2 flex items-center gap-2">
+              <span className="size-3 rounded-full border border-gray-300 bg-gray-900" />
+              <span className="text-xs text-gray-600">Black</span>
+            </div>
+          </div>
+          <span className="w-16 text-sm text-gray-600">$220</span>
+          <div className="flex items-center rounded-md border border-gray-300">
+            <button
+              type="button"
+              aria-label="Decrease quantity"
+              className="px-3 py-1 text-gray-600"
+            >
+              −
+            </button>
+            <span className="min-w-8 text-center text-sm">2</span>
+            <button
+              type="button"
+              aria-label="Increase quantity"
+              className="px-3 py-1 text-gray-600"
+            >
+              +
+            </button>
+          </div>
+          <span className="w-20 text-right text-sm font-bold text-gray-800">
+            $440
+          </span>
+          <button
+            type="button"
+            aria-label="Remove item"
+            className="text-gray-600"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="size-5"
+              aria-hidden="true"
+            >
+              <path d="M4 7h16" />
+              <path d="M9 7V4h6v3" />
+              <path d="M6 7l1 13h10l1-13" />
+              <path d="M10 11v5M14 11v5" />
+            </svg>
+          </button>
+        </div>
+
+        {/* Row 3 */}
+        <div className="flex flex-wrap items-center gap-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
+          <img
+            src={bag}
+            alt="Classic chain bag"
+            className="size-20 rounded-md object-cover"
+          />
+          <div className="min-w-40 flex-1">
+            <h3 className="text-sm font-bold text-gray-800">
+              Classic chain bag
+            </h3>
+            <div className="mt-2 flex items-center gap-2">
+              <span className="size-3 rounded-full border border-gray-300 bg-pink-300" />
+              <span className="text-xs text-gray-600">Pink</span>
+            </div>
+          </div>
+          <span className="w-16 text-sm text-gray-600">$180</span>
+          <div className="flex items-center rounded-md border border-gray-300">
+            <button
+              type="button"
+              aria-label="Decrease quantity"
+              className="px-3 py-1 text-gray-600"
+            >
+              −
+            </button>
+            <span className="min-w-8 text-center text-sm">1</span>
+            <button
+              type="button"
+              aria-label="Increase quantity"
+              className="px-3 py-1 text-gray-600"
+            >
+              +
+            </button>
+          </div>
+          <span className="w-20 text-right text-sm font-bold text-gray-800">
+            $180
+          </span>
+          <button
+            type="button"
+            aria-label="Remove item"
+            className="text-gray-600"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="size-5"
+              aria-hidden="true"
+            >
+              <path d="M4 7h16" />
+              <path d="M9 7V4h6v3" />
+              <path d="M6 7l1 13h10l1-13" />
+              <path d="M10 11v5M14 11v5" />
+            </svg>
+          </button>
+        </div>
+    </div>
+  );
+}
+
+export default CartRows;
+
+--------------------------------------------------------------------------------
+FILE: src/assets/heart.svg
+--------------------------------------------------------------------------------
+<svg xmlns="http://www.w3.org/2000/svg">
+  <symbol id="heart-outline" viewBox="0 0 24 24">
+    <path
+      d="M12 20.5s-7.5-4.6-7.5-9.6A4.4 4.4 0 0 1 12 7.6a4.4 4.4 0 0 1 7.5 3.3c0 5-7.5 9.6-7.5 9.6Z"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.8"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </symbol>
+</svg>
+
+
+================================================================================
+8. FULL SOURCE - RATING ASSET AND PROJECT CONFIG
+================================================================================
+
+--------------------------------------------------------------------------------
+FILE: src/assets/Star 2.svg
+--------------------------------------------------------------------------------
+<svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4.01641 0.635706C4.41875 -0.211901 5.58125 -0.211902 5.98359 0.635704L6.67895 2.10059C6.83872 2.43717 7.14755 2.67047 7.50481 2.72444L9.05967 2.95935C9.95933 3.09527 10.3186 4.24477 9.66756 4.90454L8.54246 6.0448C8.28394 6.30679 8.16598 6.68427 8.22701 7.05421L8.49261 8.66427C8.64629 9.59588 7.70581 10.3063 6.90112 9.86647L5.51041 9.1063C5.19087 8.93164 4.80913 8.93164 4.48959 9.1063L3.09888 9.86647C2.2942 10.3063 1.35371 9.59589 1.50739 8.66428L1.77299 7.05421C1.83402 6.68427 1.71606 6.30679 1.45754 6.0448L0.332438 4.90454C-0.318567 4.24477 0.0406641 3.09527 0.94033 2.95935L2.49519 2.72444C2.85244 2.67047 3.16128 2.43717 3.32105 2.10059L4.01641 0.635706Z" fill="#FFC000"/>
+</svg>
+
+--------------------------------------------------------------------------------
+FILE: package.json
+--------------------------------------------------------------------------------
+{
+  "name": "ecommerce",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "tailwindcss": "^4.3.3"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "eslint": "^10.13.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.7",
+    "globals": "^17.13.0",
+    "vite": "^8.3.4"
+  }
+}
+
+--------------------------------------------------------------------------------
+FILE: vite.config.js
+--------------------------------------------------------------------------------
+import react from "@vitejs/plugin-react";
+import { defineConfig } from "vite";
+import tailwindcss from "@tailwindcss/vite";
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [react(), tailwindcss()],
+});
+
+--------------------------------------------------------------------------------
+FILE: index.html
+--------------------------------------------------------------------------------
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ecommerce</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
+
+--------------------------------------------------------------------------------
+FILE: eslint.config.js
+--------------------------------------------------------------------------------
+import js from '@eslint/js'
+import globals from 'globals'
+import reactHooks from 'eslint-plugin-react-hooks'
+import reactRefresh from 'eslint-plugin-react-refresh'
+import { defineConfig, globalIgnores } from 'eslint/config'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{js,jsx}'],
+    extends: [
+      js.configs.recommended,
+      reactHooks.configs.flat.recommended,
+      reactRefresh.configs.vite,
+    ],
+    languageOptions: {
+      globals: globals.browser,
+      parserOptions: { ecmaFeatures: { jsx: true } },
+    },
+  },
+])
+
+
+================================================================================
+9. EDUCATIONAL MATERIALS - LOCATIONS AND ROLE
+================================================================================
+
+All four files below are retained. Their contents are quoted in this bundle
+where practical; the test file is summarized because it is a lecture artifact,
+not a regression suite for the final baseline.
+
+9.1 REACT_LECTURE_EXAMPLES.txt
+--------------------------------------------------------------------------------
+Path: REACT_LECTURE_EXAMPLES.txt
+Role: step-by-step lecture examples.
+
+Steps present:
+    1. ProductCard & Props
+    2. Passing Multiple Products
+    3. Adding Price
+    4. Destructuring & Default Props
+    5. Rendering Products with map()
+    6. Conditional Rendering with Ternary Operator
+    7. Conditional Rendering with Logical AND
+    8. Showing Discount Inside ProductCard
+    9. Separating Discount Logic into DiscountBadge
+
+9.2 REACT_LIVE_TASKS_AND_SOLUTIONS.txt
+--------------------------------------------------------------------------------
+Path: REACT_LIVE_TASKS_AND_SOLUTIONS.txt
+Role: live-session student tasks plus instructor solutions.
+
+It covers the reviews prop, keeping title/price if already added, the discount
+prop, and the migration from literal ProductCard calls to products.map().
+
+9.3 lecture.txt
+--------------------------------------------------------------------------------
+Path: lecture.txt
+Role: short code snippets used during the lecture.
+
+It includes Props examples, destructuring/defaults, Stone 2 (products array and
+map), and Stone 3 (conditional rendering).
+
+9.4 lecture-test/product-card.test.mjs
+--------------------------------------------------------------------------------
+Path: lecture-test/product-card.test.mjs
+Role: Node test file that renders the real ProductCard/FlashSales through Vite
+and asserts the real class structure and behavior.
+
+IMPORTANT:
+This file contains source-state tests that expect the lecture STARTER state,
+for example:
+    - four literal <ProductCard /> calls in FlashSales;
+    - no .map() and no products array;
+    - ProductCard with no props/destructuring.
+
+The current final baseline intentionally differs: FlashSales uses products.map()
+and ProductCard receives title/price props. Therefore do NOT run this test file
+as a regression test against the current baseline.
+
+The full contents of the three text materials follow.
+
+--------------------------------------------------------------------------------
+FILE: REACT_LECTURE_EXAMPLES.txt
+--------------------------------------------------------------------------------
+REACT LECTURE EXAMPLES
+
+STEP 1. ProductCard & Props
+<ProductCard title="Shoulder Bag" />
+
+function ProductCard(props) {
+  return (
+    <div className="card-down flex flex-col gap-1.5 py-4 px-18.5">
+      <h3 className="text-base font-bold text-gray-800">{props.title}</h3>
+    </div>
+  );
+}
+
+STEP 2. Passing Multiple Products
+<div className="flex gap-5">
+  <ProductCard title="Shoulder Bag" />
+  <ProductCard title="Running Shoes" />
+</div>
+
+STEP 3. Adding Price
+<ProductCard title="Shoulder Bag" price={79.99} />
+<ProductCard title="Running Shoes" price={120} />
+
+function ProductCard(props) {
+  return (
+    <div className="card-down flex flex-col gap-1.5 py-4 px-18.5">
+      <h3 className="text-base font-bold text-gray-800">{props.title}</h3>
+      <div className="price flex items-center justify-between">
+        <span className="text-sm font-bold text-red-off">${props.price}</span>
+      </div>
+    </div>
+  );
+}
+
+STEP 4. Destructuring & Default Props
+function ProductCard({ title, price }) {
+  return (
+    <div className="card-down flex flex-col gap-1.5 py-4 px-18.5">
+      <h3 className="text-base font-bold text-gray-800">{title}</h3>
+      <div className="price flex items-center justify-between">
+        <span className="text-sm font-bold text-red-off">${price}</span>
+      </div>
+    </div>
+  );
+}
+
+function ProductCard({
+  title = "Untitled Product",
+  price = 0,
+}) 
+
+STEP 5. Rendering Products with map()
+Stone 2
+const products = [
+  {
+    id: 1,
+    title: "Shoulder Bag",
+    price: 79.99,
+  },
+  {
+    id: 2,
+    title: "Running Shoes",
+    price: 120,
+  },
+  {
+    id: 3,
+    title: "Classic Watch",
+    price: 95,
+  },
+  {
+    id: 4,
+    title: "Casual T-Shirt",
+    price: 35,
+  },
+];
+
+<div className="flex gap-5">
+  {products.map((product) => (
+    <ProductCard
+      key={product.id}
+      title={product.title}
+      price={product.price}
+    />
+  ))}
+</div>
+
+STEP 6. Conditional Rendering with Ternary Operator
+stone 3
+const hasDiscount = true;
+
+return (
+  <div className="price flex items-center justify-between">
+    {hasDiscount ? (
+      <span className="sale py-0.75 px-1.5 rounded-xs bg-red-off text-[8px] font-semibold text-white">
+        -40%
+      </span>
+    ) : (
+      <span>Regular Price</span>
+    )}
+  </div>
+);
+
+STEP 7. Conditional Rendering with Logical AND
+const hasDiscount = true;
+
+return (
+  <div className="price flex items-center justify-between">
+    {hasDiscount && (
+      <span className="sale py-0.75 px-1.5 rounded-xs bg-red-off text-[8px] font-semibold text-white">
+        -40%
+      </span>
+    )}
+  </div>
+);
+
+STEP 8. Showing Discount Inside ProductCard
+function ProductCard({ discount = 0 }) {
+  return (
+    <div className="price flex items-center justify-between">
+      {discount > 0 && (
+        <span className="sale py-0.75 px-1.5 rounded-xs bg-red-off text-[8px] font-semibold text-white">
+          -{discount}%
+        </span>
+      )}
+    </div>
+  );
+}
+
+STEP 9. Separating Discount Logic into DiscountBadge
+function DiscountBadge({ discount }) {
+  if (discount <= 0) {
+    return null;
+  }
+
+  return (
+    <span className="sale py-0.75 px-1.5 rounded-xs bg-red-off text-[8px] font-semibold text-white">
+      -{discount}%
+    </span>
+  );
+}
+
+--------------------------------------------------------------------------------
+FILE: REACT_LIVE_TASKS_AND_SOLUTIONS.txt
+--------------------------------------------------------------------------------
+================================================================================
+REACT LIVE SESSION — TASKS & SOLUTIONS
+================================================================================
+
+TASK 1 — Reviews Prop
+When: after STEP 4 — Destructuring & Default Props
+Duration: 8–10 minutes
+Files: src/components/product/ProductCard.jsx
+       src/components/home/FlashSales.jsx
+
+STUDENT TASK
+------------
+عدد التقييمات مكتوب حاليًا مباشرة داخل ProductCard:
+
+<span>(54)</span>
+
+المطلوب:
+1. حوّل الرقم 54 إلى Prop جديد اسمه reviews، بقيمة افتراضية 54.
+2. استخدم الـ Prop داخل نفس عنصر الـ span مع الحفاظ على الأقواس.
+3. في FlashSales، مرّر reviews={128} إلى منتج واحد فقط من المنتجات الأربعة.
+4. اترك باقي المنتجات بدون تمرير القيمة، بحيث تستخدم القيمة الافتراضية.
+5. لا تغيّر أي className موجودة في الكارت.
+
+EXPECTED RESULT / QUICK CHECK
+-----------------------------
+- كارت واحد يعرض (128).
+- الثلاثة الآخرون يعرضون (54).
+- عنصر التقييم ما زال داخل .rating.
+- لا يوجد رقم 54 مكتوب مباشرة داخل الـ span.
+
+
+================================================================================
+INSTRUCTOR SOLUTIONS — DO NOT SHOW TO STUDENTS
+================================================================================
+
+TASK 1 SOLUTION
+
+File: src/components/product/ProductCard.jsx
+
+Before:
+function ProductCard() {
+
+After:
+function ProductCard({ reviews = 54 }) {
+
+If you already added title/price props during the lecture, keep them and add
+reviews to the same destructuring:
+
+function ProductCard({ title, price, reviews = 54 }) {
+
+Rating block after the change:
+
+<div className="rating flex items-center gap-px">
+  <div className="flex">
+    <img className="size-3" src={star} />
+    <img className="size-3" src={star} />
+    <img className="size-3" src={star} />
+    <img className="size-3" src={star} />
+    <img className="size-3" src={star} />
+  </div>
+  <span>({reviews})</span>
+</div>
+
+
+File: src/components/home/FlashSales.jsx
+
+<div className="flex gap-5">
+  <ProductCard reviews={128} />
+  <ProductCard />
+  <ProductCard />
+  <ProductCard />
+</div>
+
+
+================================================================================
+TASK 2 — Products, map() and Conditional Discount
+When: after STEP 8 — Showing Discount Inside ProductCard, and before STEP 9
+Duration: 12–15 minutes
+Files: src/components/home/FlashSales.jsx
+       src/components/product/ProductCard.jsx
+
+STUDENT TASK
+------------
+حوّل عرض الكروت إلى عرض ديناميكي من بيانات المنتجات:
+
+1. استخدم مصفوفة products كمصدر البيانات لعرض أربعة منتجات.
+2. كل منتج يجب أن يحتوي على id وtitle وprice وdiscount على الأقل.
+   أضف reviews من Task 1، وأي حقول أخرى تحتاجها من الكارت.
+3. اعرض المنتجات باستخدام map داخل:
+
+<div className="flex gap-5">
+
+4. استخدم key={product.id}.
+5. مرّر discount من بيانات المنتج إلى ProductCard.
+6. داخل ProductCard اعرض عنصر الخصم الحقيقي span.sale بكامل الـ classes
+   الأصلية فقط عندما discount > 0، واخفِه عندما تكون القيمة 0.
+7. لازم تكون البيانات فيها منتج عليه خصم ومنتج بدون خصم على الأقل.
+8. ممنوع إنشاء DiscountBadge في هذا التاسك.
+
+EXPECTED RESULT / QUICK CHECK
+-----------------------------
+- أربعة كروت تظهر من products.map وليس من استدعاءات يدوية.
+- key={product.id} موجود.
+- المنتج صاحب discount = 40 يعرض شارة خصم -40%.
+- المنتج صاحب discount = 0 لا يعرض span.sale إطلاقًا.
+- عنصر الخصم هو span.sale بالـ classes الأصلية، وليس span عامًا.
+- الشرط مستخدم بـ Logical AND: discount > 0 && (...).
+- لا يوجد DiscountBadge منفصل.
+
+
+================================================================================
+INSTRUCTOR SOLUTIONS — DO NOT SHOW TO STUDENTS
+================================================================================
+
+TASK 2 SOLUTION
+
+File: src/components/home/FlashSales.jsx
+
+import ProductCard from "../product/ProductCard";
+
+const products = [
+  {
+    id: 1,
+    title: "Tonny Black",
+    description: "Shoulder bag-White-Plain",
+    price: 50,
+    oldPrice: 100,
+    reviews: 128,
+    discount: 40,
+  },
+  {
+    id: 2,
+    title: "Running Shoes",
+    description: "Lightweight running shoes",
+    price: 120,
+    oldPrice: 150,
+    reviews: 54,
+    discount: 0,
+  },
+  {
+    id: 3,
+    title: "Classic Watch",
+    description: "Classic leather watch",
+    price: 95,
+    oldPrice: 120,
+    reviews: 23,
+    discount: 15,
+  },
+  {
+    id: 4,
+    title: "Casual T-Shirt",
+    description: "Cotton regular-fit t-shirt",
+    price: 35,
+    oldPrice: 45,
+    reviews: 7,
+    discount: 0,
+  },
+];
+
+function FlashSales() {
+  return (
+    <section className="flash-sales flex flex-col gap-12 max-w-page mx-auto">
+      <div className="flex items-center justify-between">
+        <h2 className="text-3xl font-medium text-black">Flash Sales</h2>
+        <a href="#">View All</a>
+      </div>
+      <div className="flex gap-5">
+        {products.map((product) => (
+          <ProductCard
+            key={product.id}
+            title={product.title}
+            description={product.description}
+            price={product.price}
+            oldPrice={product.oldPrice}
+            reviews={product.reviews}
+            discount={product.discount}
+          />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+export default FlashSales;
+
+
+File: src/components/product/ProductCard.jsx
+
+import bag from "../../assets/photo bag.png";
+import star from "../../assets/Star 2.svg";
+
+function ProductCard({
+  title = "Tonny Black",
+  description = "Shoulder bag-White-Plain",
+  price = 50,
+  oldPrice = 100,
+  reviews = 54,
+  discount = 0,
+}) {
+  return (
+    <div className="card flex flex-col w-75 bg-white shadow-2xl rounded-lg">
+      <div className="card-top flex flex-col items-center gap-1.25 py-4">
+        <p className="text-sm font-extrabold text-gray-400">Deal of the Day</p>
+        <div className="date flex flex-col items-center">
+          <div className="flex items-center gap-1.5 text-lg font-extrabold text-gray-800">
+            <span>12</span>
+            <span>:</span>
+            <span>43</span>
+            <span>:</span>
+            <span>12</span>
+          </div>
+          <div className="date-info flex gap-6 text-xs text-gray-400">
+            <span>hour</span>
+            <span>min</span>
+            <span>sec</span>
+          </div>
+        </div>
+      </div>
+      <div className="card-mid flex items-center justify-center h-40.5">
+        <img className="h-32 w-60 object-cover" src={bag} alt="product image" />
+      </div>
+      <div className="card-down flex flex-col gap-1.5 py-4 px-18.5">
+        <h3 className="text-base font-bold text-gray-800">{title}</h3>
+        <p className="text-xs text-gray-600">{description}</p>
+        <div className="rating flex items-center gap-px">
+          <div className="flex">
+            <img className="size-3" src={star} />
+            <img className="size-3" src={star} />
+            <img className="size-3" src={star} />
+            <img className="size-3" src={star} />
+            <img className="size-3" src={star} />
+          </div>
+          <span>({reviews})</span>
+        </div>
+        <div className="price flex items-center justify-between">
+          <span className="text-sm font-bold text-red-off">{price}$</span>
+          <del className="text-xs text-gray-600">{oldPrice}$</del>
+          {discount > 0 && (
+            <span className="sale py-0.75 px-1.5 rounded-xs bg-red-off text-[8px] font-semibold text-white">
+              -{discount}%
+            </span>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default ProductCard;
+
+
+================================================================================
+COMMON MISTAKES AND FAST CHECKS
+================================================================================
+
+TASK 1
+- Default value missing from the destructuring: display shows (undefined).
+- Writing {reviews} without the parentheses: expected output is (128), not 128.
+- Passing reviews={128} to every card instead of one.
+- Changing .rating or the span classes instead of only the value.
+- Not passing reviews from FlashSales at all.
+Fast check: search (128) once and (54) three times.
+
+TASK 2
+- Using key={index} instead of key={product.id}.
+- Keeping four manual <ProductCard /> calls instead of products.map.
+- Not passing discount, or passing it as a string such as "40".
+- Showing the badge for discount >= 0 instead of discount > 0.
+- Rendering span.sale unconditionally, so products without discount still show it.
+- Using a generic <span> or losing the original .sale classes.
+- Creating DiscountBadge before STEP 9.
+- Passing discount to only one card instead of each mapped product.
+Fast check: the solution data has exactly two products with discount > 0, so
+two span.sale elements should appear and two cards should have none.
+
+--------------------------------------------------------------------------------
+FILE: lecture.txt
+--------------------------------------------------------------------------------
+<ProductCard title="Shoulder Bag" />
+
+function ProductCard(props) {
+  return (
+    <div>
+      <h3>{props.title}</h3>
+    </div>
+  );
+}
+
+<ProductCard title="Shoulder Bag" />
+<ProductCard title="Running Shoes" />
+
+<ProductCard title="Shoulder Bag" price={79.99} />
+<ProductCard title="Running Shoes" price={120} />
+
+function ProductCard(props) {
+  return (
+    <div>
+      <h3>{props.title}</h3>
+      <p>${props.price}</p>
+    </div>
+  );
+}
+
+function ProductCard({ title, price }) {
+  return (
+    <div>
+      <h3>{title}</h3>
+      <p>${price}</p>
+    </div>
+  );
+}
+
+function ProductCard({
+  title = "Untitled Product",
+  price = 0,
+}) 
+
+Stone 2
+const products = [
+  {
+    id: 1,
+    title: "Shoulder Bag",
+    price: 79.99,
+  },
+  {
+    id: 2,
+    title: "Running Shoes",
+    price: 120,
+  },
+  {
+    id: 3,
+    title: "Classic Watch",
+    price: 95,
+  },
+  {
+    id: 4,
+    title: "Casual T-Shirt",
+    price: 35,
+  },
+];
+
+<div className="flex gap-5">
+  {products.map((product) => (
+    <ProductCard
+      key={product.id}
+      title={product.title}
+      price={product.price}
+    />
+  ))}
+</div>
+
+stone 3
+const hasDiscount = true;
+
+return (
+  <div>
+    {hasDiscount ? <span>Discount</span> : <span>Regular Price</span>}
+  </div>
+);
+
+const hasDiscount = true;
+
+return (
+  <div>
+    {hasDiscount && <span>Discount</span>}
+  </div>
+);
+
+function ProductCard({ discount = 0 }) {
+  return (
+    <div>
+      {discount > 0 && (
+        <span>Discount</span>
+      )}
+    </div>
+  );
+}
+
+
+function DiscountBadge({ discount }) {
+  if (discount <= 0) {
+    return null;
+  }
+
+  return <span>Discount</span>;
+}
+
+
+================================================================================
+10. CLEANUP RECORD
+================================================================================
+
+Deleted from the working tree:
+    src/components/home/FlashSales.lecture.jsx
+    src/components/ui/Section.jsx
+    lectureCode.txt
+
+Reason:
+- FlashSales.lecture.jsx existed only to hold the educational code until it
+  replaced FlashSales.jsx. The copy was verified first (same blob hash), then
+  the lecture file was deleted.
+- Section.jsx was a temporary Section experiment. It was not imported anywhere.
+- lectureCode.txt was a temporary copy of that experiment, not a primary source.
+
+Preserved on purpose:
+    ProductCard.jsx
+    REACT_LECTURE_EXAMPLES.txt
+    REACT_LIVE_TASKS_AND_SOLUTIONS.txt
+    lecture.txt
+    lecture-test/product-card.test.mjs
+    CLAUDE_CODE_BUNDLE.txt
+    Trending.jsx
+    Top100.jsx
+    CartRows.jsx
+    heart.svg
+    Home.jsx
+    App.jsx
+    index.css
+    all backup refs and the external backup directory
+
+Do not restore the deleted experiment files into the project unless the
+instructor explicitly asks. Their old copies remain in the external backup.
+
+
+================================================================================
+11. STARTING POINT FOR THE NEXT WORK
+================================================================================
+
+1. Work on session-combined only.
+2. Open src/components/home/FlashSales.jsx and
+   src/components/product/ProductCard.jsx as the lecture files.
+3. Keep the current Props/Data/map implementation exactly as the starting point.
+4. Do not replace it with the static repeated-card version.
+5. Do not extract ProductCard, Section, or any other abstraction further.
+6. Do not add hooks, APIs, state management, or event handlers unless the
+   lecture explicitly requires them.
+7. Leave Trending, Top100, CartRows, Home, App, and CSS unchanged unless a
+   direct requirement demands a change.
+8. No commit or push unless explicitly requested.
+
+Expected student-facing topics from this baseline:
+- function components;
+- props and default props;
+- destructuring props;
+- arrays of data;
+- rendering with map();
+- key;
+- conditional rendering (the `dis` flag in ProductCard).
+
+
+================================================================================
+12. VERIFICATION SNAPSHOT
+================================================================================
+
+The cleanup was verified with:
+
+    npm run lint    -> exit 0
+    npm run build   -> exit 0
+
+Key blob hashes in the current working tree:
+    src/components/home/FlashSales.jsx        aeb1e28671340fb9fc2e633242346e0d6c948be9
+    src/components/product/ProductCard.jsx    9d8fe20c547bf1decb8b3a1c7ba040c9f585c5cc
+    src/pages/Home.jsx                        0a2af4609f9cf222bddbddcb9fed9fae038c19c1
+    src/components/home/Trending.jsx          234bffecdf0c455ead43571573c6c54a9048c385
+    src/components/home/Top100.jsx            028f77c9ff9016dcfd84076e2ddb10d78926bc8c
+    src/components/cart/CartRows.jsx          e6baf52a0c1fa066593be129c262477871c47e6b
+    src/assets/heart.svg                      1906f247275b23d0d3f09f64dbb41a19a7fa37e9
+
+FlashSales.jsx hash equals the old educational blob from 43fe37f:
+    aeb1e28671340fb9fc2e633242346e0d6c948be9
+
+This confirms the educational file was transferred without changes.
+
+================================================================================
+END OF BUNDLE
+================================================================================

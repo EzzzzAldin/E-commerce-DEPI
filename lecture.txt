@@ -1,0 +1,108 @@
+<ProductCard title="Shoulder Bag" />
+
+function ProductCard(props) {
+  return (
+    <div>
+      <h3>{props.title}</h3>
+    </div>
+  );
+}
+
+<ProductCard title="Shoulder Bag" />
+<ProductCard title="Running Shoes" />
+
+<ProductCard title="Shoulder Bag" price={79.99} />
+<ProductCard title="Running Shoes" price={120} />
+
+function ProductCard(props) {
+  return (
+    <div>
+      <h3>{props.title}</h3>
+      <p>${props.price}</p>
+    </div>
+  );
+}
+
+function ProductCard({ title, price }) {
+  return (
+    <div>
+      <h3>{title}</h3>
+      <p>${price}</p>
+    </div>
+  );
+}
+
+function ProductCard({
+  title = "Untitled Product",
+  price = 0,
+}) 
+
+Stone 2
+const products = [
+  {
+    id: 1,
+    title: "Shoulder Bag",
+    price: 79.99,
+  },
+  {
+    id: 2,
+    title: "Running Shoes",
+    price: 120,
+  },
+  {
+    id: 3,
+    title: "Classic Watch",
+    price: 95,
+  },
+  {
+    id: 4,
+    title: "Casual T-Shirt",
+    price: 35,
+  },
+];
+
+<div className="flex gap-5">
+  {products.map((product) => (
+    <ProductCard
+      key={product.id}
+      title={product.title}
+      price={product.price}
+    />
+  ))}
+</div>
+
+stone 3
+const hasDiscount = true;
+
+return (
+  <div>
+    {hasDiscount ? <span>Discount</span> : <span>Regular Price</span>}
+  </div>
+);
+
+const hasDiscount = true;
+
+return (
+  <div>
+    {hasDiscount && <span>Discount</span>}
+  </div>
+);
+
+function ProductCard({ discount = 0 }) {
+  return (
+    <div>
+      {discount > 0 && (
+        <span>Discount</span>
+      )}
+    </div>
+  );
+}
+
+
+function DiscountBadge({ discount }) {
+  if (discount <= 0) {
+    return null;
+  }
+
+  return <span>Discount</span>;
+}
