@@ -7,8 +7,8 @@ function Home() {
   return (
     <>
       <FlashSales />
-      <Trending />
       <Top100 />
+      <Trending />
       <CartRows />
     </>
   );
