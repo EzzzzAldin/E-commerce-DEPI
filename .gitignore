@@ -26,3 +26,5 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+_agent/
+CLAUDE_CODE_BUNDLE.txt
