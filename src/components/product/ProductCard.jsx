@@ -1,10 +1,32 @@
+import {useState} from "react";
 import bag from "../../assets/photo bag.png";
 import star from "../../assets/Star 2.svg";
+import heartIcon from "../../assets/heart.svg?no-inline";
 
-function ProductCard({ title = "Test Product", price = 100 }) {
+function ProductCard({
+  title = "Test Product",
+  price = 100,
+  variant,
+  description,
+  oldPrice,
+  review,
+  discount,
+}) {
   // L1 => Data
+  const [isFav, setIsFav] = useState(false);
+
+  // let isFav = false;;
   // L2 => Effects
   // L3 => Logic
+  // btn.addEventListener("click", (event) => {
+    
+  // })
+
+  const favHandler = () => {
+
+    setIsFav(!isFav);
+    console.log(isFav);
+  }
   // L4 => View
   // const users = { username: "omar", age: "30" };
 
@@ -12,6 +34,57 @@ function ProductCard({ title = "Test Product", price = 100 }) {
   // const username = users.name;
   // const userAge = users.age;
   const dis = false;
+  if (variant === "top") {
+    return (
+      <>
+        {/* Card 1 */}
+        <div className="overflow-hidden rounded-lg bg-white shadow-md">
+          <div className="flex aspect-square items-center justify-center bg-neutral-100">
+            <img
+              src={bag}
+              alt={title}
+              className="h-full w-full object-contain"
+            />
+          </div>
+          <div className="p-5">
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <h3 className="text-base font-bold text-gray-800">{title}</h3>
+                <p className="text-xs text-gray-600">{description}</p>
+              </div>
+              <button type="button" className="shrink-0 cursor-pointer click:scale-90 hover:scale-95 transition-transform duration-200" aria-label="toggle favorite" onClick={favHandler}>
+              <svg
+                viewBox="0 0 24 24"
+                className="size-6 shrink-0 text-gray-600"
+                fill={isFav ? "currentColor" : "none"}
+                aria-hidden="true"
+              >
+                <use href={`${heartIcon}#heart-outline`} />
+              </svg>
+              </button>
+            </div>
+            <div className="mt-3 flex items-center gap-2">
+              <div className="flex gap-0.5">
+                <img src={star} alt="" className="size-4" />
+                <img src={star} alt="" className="size-4" />
+                <img src={star} alt="" className="size-4" />
+                <img src={star} alt="" className="size-4" />
+                <img src={star} alt="" className="size-4" />
+              </div>
+              <span className="text-xs text-gray-600">({review})</span>
+            </div>
+            <div className="mt-3 flex items-center gap-2">
+              <span className="text-base font-bold text-red-off">${price}</span>
+              <del className="text-sm text-gray-600">${oldPrice}</del>
+              <span className="text-xs font-semibold text-red-off">
+                -{discount}%
+              </span>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
   return (
     <div className="card flex flex-col w-75 bg-white shadow-2xl rounded-lg">
       <div className="card-top flex flex-col items-center gap-1.25 py-4">

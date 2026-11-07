@@ -1,17 +1,11 @@
 import bag from "../../assets/photo bag.png";
+import SectionTitle from "../ui/Section";
 
-function Trending() {
+function Trending() {      
+
   return (
-    <section className="trending flex flex-col gap-12 max-w-page mx-auto mt-20">
-      <div className="flex items-center justify-between">
-        <h2 className="text-3xl font-medium text-black">Trending must-haves</h2>
-        <a href="#" className="flex items-center gap-1 text-sm text-gray-600">
-          View all <span aria-hidden="true">›</span>
-        </a>
-      </div>
-
-      <div className="grid gap-5 md:grid-cols-3">
-        {/* Card 1 */}
+    <SectionTitle title="Trending must-haves" classSection="trending">
+    {/* Card 1 */}
         <div className="relative aspect-[3/2] overflow-hidden rounded-lg">
           <img
             src={bag}
@@ -114,9 +108,8 @@ function Trending() {
             </a>
           </div>
         </div>
-      </div>
-    </section>
-  );
+    </SectionTitle>
+  )
 }
 
 export default Trending;
