@@ -1,11 +1,14 @@
 import Home from "./pages/Home";
+import Navbar from "./components/layouts/Navbar";
 
 function App() {
   return (
-    <main>
-      <Home />
-      <h2>My Branch</h2>
-    </main>
+    <>
+      <Navbar />
+      <main>
+        <Home />
+      </main>
+    </>
   );
 }
 

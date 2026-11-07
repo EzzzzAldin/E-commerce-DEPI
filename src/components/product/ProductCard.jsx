@@ -139,6 +139,12 @@ function ProductCard({
             </span>
           )}
         </div>
+        <button
+          type="button"
+          className="w-full rounded-md border border-gray-600 bg-white py-2 text-sm font-bold text-gray-800 hover:bg-gray-800 hover:text-white"
+        >
+          Add to cart
+        </button>
       </div>
     </div>
   );
