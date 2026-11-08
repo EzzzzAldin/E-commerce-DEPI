@@ -24,7 +24,7 @@ const menuItems = [
   "Best seller",
 ];
 
-function Navbar({ cartCount = 0 }) {
+function Navbar({ cartCount = 0, onCartView }) {
   // L4 => View
   return (
     <header className="header bg-white">
@@ -128,6 +128,7 @@ function Navbar({ cartCount = 0 }) {
             <button
               type="button"
               aria-label={`Card, ${cartCount} products`}
+              onClick={onCartView}
               className="flex items-center gap-2 text-sm"
             >
               <BagIcon className="size-5" />

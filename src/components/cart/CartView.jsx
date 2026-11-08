@@ -25,7 +25,7 @@ const defaultItems = [
   },
 ];
 
-function CartView({ items = defaultItems }) {
+function CartView({ items = defaultItems, onIncrease }) {
   // L4 => View
   return (
     <section className="cart-view max-w-page mx-auto px-4 py-10">
@@ -43,6 +43,7 @@ function CartView({ items = defaultItems }) {
               price={item.price}
               qty={item.qty}
               color={item.color}
+              onIncrease={() => onIncrease(item.id)}
             />
           ))}
         </div>

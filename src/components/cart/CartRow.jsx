@@ -6,6 +6,7 @@ function CartRow({
   qty = 1,
   image = bag,
   color,
+  onIncrease,
 }) {
   // L4 => View
   return (
@@ -37,6 +38,7 @@ function CartRow({
         <button
           type="button"
           aria-label="Increase quantity"
+          onClick={onIncrease}
           className="px-3 py-1 text-gray-600"
         >
           +
@@ -45,11 +47,7 @@ function CartRow({
       <span className="w-20 text-right text-sm font-bold text-gray-800">
         ${(price * qty).toFixed(2)}
       </span>
-      <button
-        type="button"
-        aria-label="Remove item"
-        className="text-gray-600"
-      >
+      <button type="button" aria-label="Remove item" className="text-gray-600">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"

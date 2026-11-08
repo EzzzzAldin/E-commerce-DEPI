@@ -2,10 +2,10 @@ import FlashSales from "../components/home/FlashSales";
 import Trending from "../components/home/Trending";
 import Top100 from "../components/home/Top100";
 
-function Home() {
+function Home({ onAddToCart }) {
   return (
     <>
-      <FlashSales />
+      <FlashSales onAddToCart={onAddToCart} />
       <Top100 />
       <Trending />
     </>

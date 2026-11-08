@@ -11,6 +11,7 @@ function ProductCard({
   oldPrice,
   review,
   discount,
+  onAddToCart,
 }) {
   // L1 => Data (Sates & Global Data)
   const [isFav, setIsFav] = useState(false);
@@ -82,6 +83,13 @@ function ProductCard({
               -{discount}%
             </span>
           </div>
+          <button
+            type="button"
+            onClick={onAddToCart}
+            className="w-full rounded-md border border-gray-600 bg-white py-2 text-sm font-bold text-gray-800 hover:bg-gray-800 hover:text-white"
+          >
+            Add to cart
+          </button>
         </div>
       </div>
     );
@@ -141,6 +149,7 @@ function ProductCard({
         </div>
         <button
           type="button"
+          onClick={onAddToCart}
           className="w-full rounded-md border border-gray-600 bg-white py-2 text-sm font-bold text-gray-800 hover:bg-gray-800 hover:text-white"
         >
           Add to cart
