@@ -91,7 +91,7 @@ function CartView({ items = defaultItems, onIncrease }) {
 
             <label className="mt-4 flex items-center justify-between gap-3 text-sm text-gray-800">
               <span className="flex items-center gap-2">
-                <input type="checkbox" defaultChecked className="size-4" />
+                <input type="checkbox" className="size-4" />
                 Pack in a Gift Box
               </span>
               <span>$10.90</span>
