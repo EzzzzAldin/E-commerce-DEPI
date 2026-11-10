@@ -39,14 +39,22 @@ const colors = [
 
 const sizes = ["2XS", "XS", "S", "M", "L", "XL", "2XL", "3XL"];
 
-function ProductsSection({ onAddToCart }) {
+function ProductsSection({ onAddToCart, search = "" }) {
+  // L1 => States & Global Data
+  const filterProducts = products.filter((product) =>
+    product.title.toLowerCase().includes(search.toLowerCase()),
+  );
+  // L2 => API Call
+  // L3 => Handler
   // L4 => View
   return (
     <section className="products-section max-w-page mx-auto mt-20 px-4">
       <div className="products-header flex flex-col gap-4 border-b border-gray-200 pb-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center gap-2">
           <h1 className="text-2xl font-bold text-gray-800">Women</h1>
-          <span className="text-sm text-gray-600">{products.length} items</span>
+          <span className="text-sm text-gray-600">
+            {filterProducts.length} items
+          </span>
         </div>
         <div className="flex items-center gap-2">
           <label htmlFor="sort-order" className="sr-only">
@@ -221,13 +229,13 @@ function ProductsSection({ onAddToCart }) {
               <span>Maximum $500</span>
             </p>
             <p className="mt-3 text-xs text-gray-400">
-              {products.length} products found
+              {filterProducts.length} products found
             </p>
           </fieldset>
         </aside>
 
         <div className="products-grid grid flex-1 grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {products.map((product) => (
+          {filterProducts.map((product) => (
             <ProductCard
               key={product.id}
               variant="top"

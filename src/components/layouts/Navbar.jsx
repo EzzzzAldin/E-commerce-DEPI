@@ -1,3 +1,5 @@
+import { useRef } from "react";
+
 import {
   CartLogo,
   SearchIcon,
@@ -24,7 +26,22 @@ const menuItems = [
   "Best seller",
 ];
 
-function Navbar({ cartCount = 0, onCartView }) {
+function Navbar({
+  cartCount = 0,
+  onCartView,
+  onSearchChange,
+  searchValue = "",
+}) {
+  // L1 => Data
+  const searchRef = useRef(null);
+  // L2 => Api Call
+  // L3 => Handler
+  const foucsSeacrhHandler = () => {
+    searchRef.current.focus();
+  };
+  // const inputHandler = (event) => {
+  //   console.log(event.target.value);
+  // };
   // L4 => View
   return (
     <header className="header bg-white">
@@ -40,6 +57,11 @@ function Navbar({ cartCount = 0, onCartView }) {
           </label>
           <input
             id="search-products"
+            value={searchValue}
+            onChange={() => {
+              onSearchChange(event);
+            }}
+            ref={searchRef}
             type="search"
             placeholder="Search Products"
             className="min-w-0 flex-1 bg-transparent px-3 py-2 text-sm text-gray-800 placeholder:text-gray-400"
@@ -54,6 +76,7 @@ function Navbar({ cartCount = 0, onCartView }) {
           <button
             type="button"
             aria-label="Search"
+            onClick={foucsSeacrhHandler}
             className="border-l border-gray-300 px-3 py-2 text-gray-800"
           >
             <SearchIcon className="size-5" />
