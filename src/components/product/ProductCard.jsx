@@ -7,6 +7,7 @@ function ProductCard({
   variant = "flash",
   title = "Test Product",
   price = 100,
+  image = bag,
   description,
   oldPrice,
   review,
@@ -39,7 +40,7 @@ function ProductCard({
       <div className="overflow-hidden rounded-lg bg-white shadow-md">
         <div className="flex aspect-square items-center justify-center bg-neutral-100">
           <img
-            src={bag}
+            src={image}
             alt={description}
             className="h-full w-full object-contain"
           />
@@ -115,7 +116,7 @@ function ProductCard({
         </div>
       </div>
       <div className="card-mid flex items-center justify-center h-40.5">
-        <img className="h-32 w-60 object-cover" src={bag} alt="product image" />
+        <img className="h-32 w-60 object-cover" src={image} alt="product image" />
       </div>
       <div className="card-down flex flex-col gap-1.5 py-4 px-18.5">
         <h3 className="text-base font-bold text-gray-800">{title}</h3>

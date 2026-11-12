@@ -39,6 +39,33 @@ const colors = [
 
 const sizes = ["2XS", "XS", "S", "M", "L", "XL", "2XL", "3XL"];
 
+const productCategories = [
+  { slug: "beauty", label: "Beauty" },
+  { slug: "fragrances", label: "Fragrances" },
+  { slug: "furniture", label: "Furniture" },
+  { slug: "groceries", label: "Groceries" },
+  { slug: "home-decoration", label: "Home Decoration" },
+  { slug: "kitchen-accessories", label: "Kitchen Accessories" },
+  { slug: "laptops", label: "Laptops" },
+  { slug: "mens-shirts", label: "Men's Shirts" },
+  { slug: "mens-shoes", label: "Men's Shoes" },
+  { slug: "mens-watches", label: "Men's Watches" },
+  { slug: "mobile-accessories", label: "Mobile Accessories" },
+  { slug: "motorcycle", label: "Motorcycle" },
+  { slug: "skin-care", label: "Skin Care" },
+  { slug: "smartphones", label: "Smartphones" },
+  { slug: "sports-accessories", label: "Sports Accessories" },
+  { slug: "sunglasses", label: "Sunglasses" },
+  { slug: "tablets", label: "Tablets" },
+  { slug: "tops", label: "Tops" },
+  { slug: "vehicle", label: "Vehicle" },
+  { slug: "womens-bags", label: "Women's Bags" },
+  { slug: "womens-dresses", label: "Women's Dresses" },
+  { slug: "womens-jewellery", label: "Women's Jewellery" },
+  { slug: "womens-shoes", label: "Women's Shoes" },
+  { slug: "womens-watches", label: "Women's Watches" },
+];
+
 function ProductsSection({ onAddToCart, search = "" }) {
   // L1 => States & Global Data
   const filterProducts = products.filter((product) =>
@@ -234,23 +261,38 @@ function ProductsSection({ onAddToCart, search = "" }) {
           </fieldset>
         </aside>
 
-        <div className="products-grid grid flex-1 grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {filterProducts.map((product) => (
-            <ProductCard
-              key={product.id}
-              variant="top"
-              title={product.title}
-              price={product.price}
-              description={product.description}
-              discount={Math.round(product.discountPercentage)}
-              oldPrice={(
-                product.price /
-                (1 - product.discountPercentage / 100)
-              ).toFixed(2)}
-              review={product.rating}
-              onAddToCart={() => onAddToCart(product)}
-            />
-          ))}
+        <div className="min-w-0 flex-1">
+          <div className="category-chips mb-5 flex gap-2 overflow-x-auto pb-1">
+            {productCategories.map((category) => (
+              <button
+                key={category.slug}
+                type="button"
+                data-category={category.slug}
+                className="shrink-0 whitespace-nowrap rounded-full border border-gray-300 bg-white px-4 py-1.5 text-sm text-gray-600 hover:bg-gray-800 hover:text-white"
+              >
+                {category.label}
+              </button>
+            ))}
+          </div>
+
+          <div className="products-grid grid flex-1 grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {filterProducts.map((product) => (
+              <ProductCard
+                key={product.id}
+                variant="top"
+                title={product.title}
+                price={product.price}
+                description={product.description}
+                discount={Math.round(product.discountPercentage)}
+                oldPrice={(
+                  product.price /
+                  (1 - product.discountPercentage / 100)
+                ).toFixed(2)}
+                review={product.rating}
+                onAddToCart={() => onAddToCart(product)}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
