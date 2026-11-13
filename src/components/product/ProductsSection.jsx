@@ -1,5 +1,8 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
 import ProductCard from "./ProductCard";
-import { products } from "../../data/products";
+import Spinner from "../ui/Spinner";
+import ErrorMessage from "../ui/ErrorMessage";
 
 const categories = [
   { name: "Casual", checked: true },
@@ -68,11 +71,32 @@ const productCategories = [
 
 function ProductsSection({ onAddToCart, search = "" }) {
   // L1 => States & Global Data
+  const [products, setProducts] = useState([]);
+  const [category, setCategory] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [err, setErr] = useState(null);
+  // L2 => API Call (Effect)
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const endpoint = category
+        ? `https://dummyjson.com/products/category/${category}?limit=0`
+        : "https://dummyjson.com/products?limit=0";
+      const response = await axios.get(endpoint);
+      setProducts(response.data.products);
+      setLoading(false);
+    };
+    fetchProducts();
+  }, [category]);
+  // L3 => Handler
   const filterProducts = products.filter((product) =>
     product.title.toLowerCase().includes(search.toLowerCase()),
   );
-  // L2 => API Call
-  // L3 => Handler
+
+  const categoryHandler = (slug) => {
+    setCategory(slug);
+    setLoading(true);
+  };
+
   // L4 => View
   return (
     <section className="products-section max-w-page mx-auto mt-20 px-4">
@@ -263,36 +287,44 @@ function ProductsSection({ onAddToCart, search = "" }) {
 
         <div className="min-w-0 flex-1">
           <div className="category-chips mb-5 flex gap-2 overflow-x-auto pb-1">
-            {productCategories.map((category) => (
+            {productCategories.map((item) => (
               <button
-                key={category.slug}
+                key={item.slug}
                 type="button"
-                data-category={category.slug}
+                data-category={item.slug}
+                onClick={() => {
+                  categoryHandler(item.slug);
+                }}
                 className="shrink-0 whitespace-nowrap rounded-full border border-gray-300 bg-white px-4 py-1.5 text-sm text-gray-600 hover:bg-gray-800 hover:text-white"
               >
-                {category.label}
+                {item.label}
               </button>
             ))}
           </div>
 
-          <div className="products-grid grid flex-1 grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {filterProducts.map((product) => (
-              <ProductCard
-                key={product.id}
-                variant="top"
-                title={product.title}
-                price={product.price}
-                description={product.description}
-                discount={Math.round(product.discountPercentage)}
-                oldPrice={(
-                  product.price /
-                  (1 - product.discountPercentage / 100)
-                ).toFixed(2)}
-                review={product.rating}
-                onAddToCart={() => onAddToCart(product)}
-              />
-            ))}
-          </div>
+          {loading ? (
+            <Spinner />
+          ) : (
+            <div className="products-grid grid flex-1 grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {filterProducts.map((product) => (
+                <ProductCard
+                  key={product.id}
+                  variant="top"
+                  title={product.title}
+                  price={product.price}
+                  image={product.thumbnail}
+                  description={product.description}
+                  discount={Math.round(product.discountPercentage)}
+                  oldPrice={(
+                    product.price /
+                    (1 - product.discountPercentage / 100)
+                  ).toFixed(2)}
+                  review={product.rating}
+                  onAddToCart={() => onAddToCart(product)}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </section>
