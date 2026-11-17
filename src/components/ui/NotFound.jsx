@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 function NotFound() {
   // L4 => View
   return (
@@ -7,12 +9,12 @@ function NotFound() {
       <p className="text-sm text-gray-600">
         The page you are looking for does not exist or has been moved.
       </p>
-      <a
-        href="#"
+      <Link
+        to="/"
         className="mt-2 rounded-md bg-gray-800 px-6 py-3 text-sm font-bold text-white"
       >
         Back to home
-      </a>
+      </Link>
     </section>
   );
 }
