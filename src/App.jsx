@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Routes, Route } from "react-router";
 import Home from "./pages/Home";
 import Navbar from "./components/layouts/Navbar";
 import CartView from "./components/cart/CartView";
@@ -6,7 +7,6 @@ import CartView from "./components/cart/CartView";
 function App() {
   // L1 => Data => (Sates & Global Data)
   const [cart, setCart] = useState([]);
-  const [isCartOpen, setIsCartOpen] = useState(false);
   const [search, setSearch] = useState("");
   // L2 => API Calls
   // L3 => Handler
@@ -32,10 +32,6 @@ function App() {
     }
   };
 
-  const toggleHandler = () => {
-    setIsCartOpen(!isCartOpen);
-  };
-
   const searchHandler = (event) => {
     setSearch(event.target.value);
   };
@@ -50,16 +46,20 @@ function App() {
     <>
       <Navbar
         cartCount={cartCount}
-        onCartView={toggleHandler}
         onSearchChange={searchHandler}
         searchValue={search}
       />
       <main>
-        {isCartOpen ? (
-          <CartView items={cart} onIncrease={increaseCartHandler} />
-        ) : (
-          <Home onAddToCart={addToCartHandler} search={search} />
-        )}
+        <Routes>
+          <Route
+            path="/"
+            element={<Home onAddToCart={addToCartHandler} search={search} />}
+          />
+          <Route
+            path="/cart"
+            element={<CartView items={cart} onIncrease={increaseCartHandler} />}
+          />
+        </Routes>
       </main>
     </>
   );

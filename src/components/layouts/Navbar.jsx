@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { Link, NavLink } from "react-router";
 
 import {
   CartLogo,
@@ -26,12 +27,7 @@ const menuItems = [
   "Best seller",
 ];
 
-function Navbar({
-  cartCount = 0,
-  onCartView,
-  onSearchChange,
-  searchValue = "",
-}) {
+function Navbar({ cartCount = 0, onSearchChange, searchValue = "" }) {
   // L1 => Data
   const searchRef = useRef(null);
   // L2 => Api Call
@@ -46,10 +42,10 @@ function Navbar({
   return (
     <header className="header bg-white">
       <div className="header-top max-w-page mx-auto flex items-center justify-between gap-4 px-4 py-3">
-        <a href="#" className="flex shrink-0 items-center gap-2">
+        <Link to="/" className="flex shrink-0 items-center gap-2">
           <CartLogo className="size-8 text-gray-800" />
           <span className="text-2xl font-bold text-gray-800">Luminae</span>
-        </a>
+        </Link>
 
         <div className="search flex min-w-0 flex-1 items-center rounded-md border border-gray-300 lg:max-w-85">
           <label htmlFor="search-products" className="sr-only">
@@ -148,10 +144,10 @@ function Navbar({
               <HeartIcon className="size-5" />
               Favorites
             </button>
-            <button
+            <Link
+              to="/cart"
               type="button"
               aria-label={`Card, ${cartCount} products`}
-              onClick={onCartView}
               className="flex items-center gap-2 text-sm"
             >
               <BagIcon className="size-5" />
@@ -161,7 +157,7 @@ function Navbar({
                   {cartCount}
                 </span>
               )}
-            </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -170,14 +166,18 @@ function Navbar({
         <ul className="max-w-page mx-auto flex items-center gap-8 overflow-x-auto px-4 py-4 text-sm text-gray-800 whitespace-nowrap lg:justify-between">
           {menuItems.map((item) => (
             <li key={item}>
-              <a
-                href="#"
-                className={
-                  item === "Woman" ? "font-bold text-[#ff7a00]" : undefined
-                }
-              >
-                {item}
-              </a>
+              {item === "Woman" ? (
+                <NavLink
+                  to="/about"
+                  className={(isActive) =>
+                    isActive ? "font-bold text-[#ff7a00]" : undefined
+                  }
+                >
+                  {item}
+                </NavLink>
+              ) : (
+                <a href="#">{item}</a>
+              )}
             </li>
           ))}
         </ul>
