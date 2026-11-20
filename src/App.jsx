@@ -1,15 +1,18 @@
 import { useState } from "react";
-import { Routes, Route, useNavigate } from "react-router";
+import { Routes, Route, useNavigate, useSearchParams } from "react-router";
 import Layout from "./components/layouts/Layout";
 import Home from "./pages/Home";
 import CartView from "./components/cart/CartView";
 import NotFound from "./components/ui/NotFound";
+import ProductDetailsPage from "./pages/ProductDetailsPage";
+import Reviews from "./components/product/Reviews";
 
 function App() {
   // L1 => Data => (Sates & Global Data)
   const [cart, setCart] = useState([]);
-  const [search, setSearch] = useState("");
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const search = searchParams.get("search") || "";
   // L2 => API Calls
   // L3 => Handler
 
@@ -36,7 +39,16 @@ function App() {
   };
 
   const searchHandler = (event) => {
-    setSearch(event.target.value);
+    const nextParams = new URLSearchParams(searchParams);
+    const value = event.target.value;
+
+    if (value) {
+      nextParams.set("search", value);
+    } else {
+      nextParams.delete("search");
+    }
+
+    setSearchParams(nextParams, { replace: true });
   };
 
   let cartCount = 0;
@@ -65,6 +77,9 @@ function App() {
             path="/cart"
             element={<CartView items={cart} onIncrease={increaseCartHandler} />}
           />
+          <Route path="/products/:id" element={<ProductDetailsPage />}>
+            <Route path="reviews" element={<Reviews />} />
+          </Route>
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

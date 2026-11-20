@@ -1,5 +1,4 @@
-import { Outlet } from "react-router";
-import bag from "../../assets/photo bag.png";
+import { Link, Outlet } from "react-router";
 import YouMightAlsoLike from "./YouMightAlsoLike";
 
 const productDetails = [
@@ -22,14 +21,14 @@ const careInstructions = [
   "Wash separately",
 ];
 
-function ProductDetails() {
+function ProductDetails({ product }) {
   // L4 => View
   return (
     <main className="max-w-page mx-auto mt-8 flex flex-col gap-12 px-4">
       <section className="grid grid-cols-1 gap-8 lg:grid-cols-2">
         <div className="flex min-w-0 items-center justify-center bg-neutral-100 p-4">
           <img
-            src={bag}
+            src={product.thumbnail}
             alt="Temporary product image placeholder"
             className="aspect-square w-full max-w-140 object-contain"
           />
@@ -38,7 +37,7 @@ function ProductDetails() {
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-2">
             <h1 className="text-2xl font-bold text-gray-800">
-              SHORT PRINTED DRESS
+              {product.title}
             </h1>
             <p className="text-xl text-gray-800">$39.99</p>
           </div>
@@ -61,7 +60,10 @@ function ProductDetails() {
 
             <div className="flex flex-wrap items-center gap-4">
               <h2 className="w-16 text-sm text-gray-800">Color</h2>
-              <div className="flex items-center gap-3" aria-label="Available colors">
+              <div
+                className="flex items-center gap-3"
+                aria-label="Available colors"
+              >
                 <span className="size-3 rounded-full bg-red-off" />
                 <span className="size-3 rounded-full bg-emerald-600" />
                 <span className="size-3 rounded-full bg-blue-400" />
@@ -75,7 +77,9 @@ function ProductDetails() {
                 <p className="text-sm text-gray-800">
                   Free Shipping to Victoria territory
                 </p>
-                <p className="text-xs text-gray-600">Delivery Time: 14–17 days</p>
+                <p className="text-xs text-gray-600">
+                  Delivery Time: 14–17 days
+                </p>
               </div>
             </div>
 
@@ -118,20 +122,23 @@ function ProductDetails() {
       <section aria-labelledby="product-description-heading">
         <div className="flex flex-wrap justify-center gap-8 border-b border-gray-300 py-4 text-sm font-bold text-gray-600">
           <span className="text-gray-800">PRODUCT DETAILS</span>
-          <span>REVIEWS (5)</span>
+          <Link to="reviews">REVIEWS (5)</Link>
           <span>SHIPPING &amp; PAYMENT</span>
         </div>
 
         <div className="grid grid-cols-1 gap-8 py-6 md:grid-cols-2">
           <div className="flex flex-col gap-6">
             <div className="flex flex-col gap-3">
-              <h2 id="product-description-heading" className="font-bold text-gray-800">
+              <h2
+                id="product-description-heading"
+                className="font-bold text-gray-800"
+              >
                 Product Description
               </h2>
               <p className="text-sm leading-6 text-gray-600">
                 Short dress with a plunging V-neckline and tie detail. Wide
-                sleeves falling below the elbow. Contrast bead details. Invisible
-                back zip fastening.
+                sleeves falling below the elbow. Contrast bead details.
+                Invisible back zip fastening.
               </p>
             </div>
             <div className="flex flex-col gap-3">

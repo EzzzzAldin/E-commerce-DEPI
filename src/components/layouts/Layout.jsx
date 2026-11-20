@@ -5,7 +5,7 @@ import Breadcrumb from "../ui/Breadcrumb";
 function Layout({
   cartCount = 0,
   onSearchChange,
-  search = "",
+  searchValue = "",
   footerVariant = "default",
   showBreadcrumb = true,
 }) {
@@ -14,7 +14,7 @@ function Layout({
     <>
       <Navbar
         cartCount={cartCount}
-        searchValue={search}
+        searchValue={searchValue}
         onSearchChange={onSearchChange}
       />
       {showBreadcrumb && <Breadcrumb />}
